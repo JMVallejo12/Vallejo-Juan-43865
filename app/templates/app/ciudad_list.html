@@ -1,0 +1,136 @@
+{% extends 'app/index.html' %}
+{% load static %}
+
+
+{% block cuerpo %}
+<div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+    <div class="d-flex justify-content-center">
+        <div class="text-center">
+            <h1 class="mx-auto my-0 text-uppercase">CIUDADES</h1>
+            
+        </div>
+    </div>
+</div>
+<section class="projects-section bg-light" id="projects">
+    <div class="container px-4 px-lg-5">
+        
+        <!-- Project One Row-->
+        <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
+            <div class="row gx-0 justify-content-center">
+                
+                <div class="col-lg-6">
+                    <a href="{% url 'busan' %}" title="Busan">
+                        <img class="img-fluid" src="{% static 'app/assets/img/busan.jpg' %}" alt="..." />
+                    </a>
+                </div>
+                
+                
+                <div class="col-lg-6">
+                    <a href="{% url 'seul' %}" title="Seul">
+                        <img class="img-fluid" src="{% static 'app/assets/img/seul.png' %}" alt="..." />
+                    </a>
+                </div>
+        <!-- Project Two Row-->
+        <div class="row gx-0 justify-content-center">
+            <div class="col-lg-6">
+                <a href="{% url 'daegu' %}" title="Daegu">
+                    <img class="img-fluid" src="{% static 'app/assets/img/daegu.jpg' %}" alt="..." />
+                </a>
+            </div>
+            
+            <div class="col-lg-6">
+                <a href="{% url 'gyeongju' %}" title="Gyeongju">
+                    <img class="img-fluid" src="{% static 'app/assets/img/gyeongju.jpg' %}" alt="..." />
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<section class="projects-section bg-light" id="projects">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <h2>Lista de Ciudades</h2>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nombre</th>
+                        <th>Habitantes</th>
+                        
+                        <th>Superficie</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                {% for ciudad in ciudad_list %}
+                    <tr>
+                        <td>{{ ciudad.id }}</td>
+                        <td>{{ ciudad.nombre }}</td>
+                        <td>{{ ciudad.habitantes }}</td>
+                        <td>{{ ciudad.superficie }}</td>
+                        
+                               
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            {% if user.is_authenticated and user.is_superuser %}
+                <h2>Administracion </h2> <a
+                href="{% url 'crear_ciudad' %}"
+                class="btn btn-primary btn-sm"
+                ><i class="fa fa-plus fa-lg" title="New Record"> </i>
+                </a>
+                
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Nombre</th>
+                            <th>Habitantes</th>
+                        
+                            <th>Superficie</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for ciudad in ciudad_list %}
+                        <tr>
+                            <td>{{ ciudad.id }}</td>
+                            <td>{{ ciudad.nombre }}</td>
+                            <td>{{ ciudad.habitantes }}</td>
+                            <td>{{ ciudad.superficie }}</td>
+                            
+                            <td>
+                                <a
+                                href="{% url 'ciudad_update' ciudad.id %}"
+                                class="btn btn-primary"
+                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
+                                </a>
+                                <a
+                                href="{% url 'borrar_ciudad' ciudad.id %}"
+                                class="btn btn-danger"
+                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
+                                </a>
+                                
+                            </td>        
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+
+            
+            
+
+            
+        </div>
+
+</section>
+
+
+{% endblock cuerpo %}

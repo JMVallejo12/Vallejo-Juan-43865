@@ -1,0 +1,107 @@
+{% extends 'app/index.html' %}
+{% load static %}
+
+
+
+{% block cuerpo %}
+    
+
+            
+            <section class="projects-section bg-light" id="projects">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <h2>Lista de Hoteles</h2>
+                        
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Nombre</th>
+                                    <th>Estrellas</th>
+                                    
+                                    <th>Ubicacion</th>
+                                    <th>Reservar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for hotel in hotel_list %}
+                                <tr>
+                                    <td>{{ hotel.id }}</td>
+                                    <td>{{ hotel.nombre }}</td>
+                                    <td>{{ hotel.estrellas }}</td>
+                                    <td>{{ hotel.ubicacion }}</td>
+                                    
+                                    <td>
+                                        <a
+                                        href="{% url 'reserva' %}"
+                                        class="btn btn-primary"
+                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                        ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
+                                        </a>
+                                        
+                                    </td>        
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                        {% if user.is_authenticated and user.is_superuser %}
+                            <h2>Administracion </h2> <a
+                            href="{% url 'crear_hotel' %}"
+                            class="btn btn-primary btn-sm"
+                            ><i class="fa fa-plus fa-lg" title="New Record"> </i>
+                            </a>
+                            
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Nombre </th>
+                                        <th>Estrellas</th>
+                                        
+                                        <th>Ubicacion</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for hotel in hotel_list %}
+                                    <tr>
+                                        <td>{{hotel.id}}</td>
+                                        <td>{{ hotel.nombre }}</td>
+                                        <td>{{ hotel.estrellas }}</td>
+                                        <td>{{ hotel.ubicacion }}</td>
+                                        
+                                        <td>
+                                            <a
+                                            href="{% url 'hotel_update' hotel.id %}"
+                                            class="btn btn-primary"
+                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                            ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
+                                            </a>
+                                            <a
+                                            href="{% url 'borrar_hotel' hotel.id %}"
+                                            class="btn btn-danger"
+                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                            ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
+                                            </a>
+                                            
+                                        </td>        
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% endif %}
+
+                        
+                        
+            
+                        
+                    </div>
+            
+            </section>
+
+            
+            
+
+                    
+{% endblock cuerpo %}

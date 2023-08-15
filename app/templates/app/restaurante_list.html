@@ -1,0 +1,157 @@
+{% extends 'app/index.html' %}
+{% load static %}
+
+
+{% block cuerpo %}
+    
+
+<section class="about-section text-center" id="cuerpo">
+
+<div id="portfolio">
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            <div class="col-lg-4 col-sm-6">
+                <a class="portfolio-box" href="https://www.tripadvisor.es/Restaurant_Review-g294197-d7132369-Reviews-Hongdae_Dakgalbi-Seoul.html#MAPVIEW" title="Hongdae Dakgalbi">
+                    <img class="img-fluid" src="{% static 'app/assets/img/HongdaeDakgalbi.jpg' %}" alt="..." />
+                    <div class="portfolio-box-caption">
+                        <div class="project-category text-white-50">Hongdae Dakgalbi</div>
+                        <div class="project-name">31-10, Wausan-ro 21-gil, Mapo-gu 1F, Seul</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a class="portfolio-box" href="https://www.tripadvisor.es/Restaurant_Review-g294197-d17423735-Reviews-Jangseng_Geongangwon-Seoul.html#MAPVIEW" title="Jangseng Geongangwon">
+                    <img class="img-fluid" src="{% static 'app/assets/img/JangsengGeongangwon.jpg' %}" alt="..." />
+                    <div class="portfolio-box-caption">
+                        <div class="project-category text-white-50">Jangseng Geongangwon</div>
+                        <div class="project-name">23, Gangnam-daero 124-gil, Gangnam-gu, Seul</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a class="portfolio-box" href="https://www.tripadvisor.es/Restaurant_Review-g294197-d10257443-Reviews-Jihwaja-Seoul.html#MAPVIEW" title="Jihwaja">
+                    <img class="img-fluid" src="{% static 'app/assets/img/Jihwaja.jpg' %}" alt="..." />
+                    <div class="portfolio-box-caption">
+                        <div class="project-category text-white-50">Jihwaja</div>
+                        <div class="project-name">125 Jahamun-ro, Jongno-gu (48 Cheongun-dong, Jongno-gu), Seul</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a class="portfolio-box" href="https://www.tripadvisor.es/Restaurant_Review-g294197-d3616586-Reviews-The_Park_View-Seoul.html#MAPVIEW" title="The Park View">
+                    <img class="img-fluid" src="{% static 'app/assets/img/TheParkView.jpg' %}" alt="..." />
+                    <div class="portfolio-box-caption">
+                        <div class="project-category text-white-50">The Park View</div>
+                        <div class="project-name">202 Jangchung-dong, Jung-gu, Seul</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a class="portfolio-box" href="https://www.tripadvisor.es/Restaurant_Review-g294197-d4030459-Reviews-Kyochon_Chicken_Dongdaemun_1-Seoul.html#MAPVIEW" title = "Kyochon Chicken Dongdaemun">
+                    <img class="img-fluid" src="{% static 'app/assets/img/KyochonChickenDongdaemun.jpg' %}" alt="..." />
+                    <div class="portfolio-box-caption">
+                        <div class="project-category text-white-50">Kyochon Chicken Dongdaemun</div>
+                        <div class="project-name">2nd floor, 464-6, Changsin-dong, Seul</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a class="portfolio-box" href="https://www.tripadvisor.es/Restaurant_Review-g294197-d13923426-Reviews-Bombay_Grill_Itaewon-Seoul.html#MAPVIEW" title="Bombay Grill Itaewon">
+                    <img class="img-fluid" src="{% static 'app/assets/img/BombayGrillItaewon.jpg' %}" alt="..." />
+                    <div class="portfolio-box-caption p-3">
+                        <div class="project-category text-white-50">Bombay Grill Itaewon</div>
+                        <div class="project-name">11, Usadan-ro 10-gil, Yongsan-gu, Seul</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<section class="projects-section bg-light" id="projects">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <h2>Lista de Restaurantes</h2>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nombre</th>
+                        <th>Calificacion</th>
+                        
+                        <th>Ubicacion</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                {% for restaurante in restaurante_list %}
+                    <tr>
+                        <td>{{ restaurante.id }}</td>
+                        <td>{{ restaurante.nombre }}</td>
+                        <td>{{ restaurante.calificacion }}</td>
+                        <td>{{ restaurante.ubicacion }}</td>
+                        
+                              
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            {% if user.is_authenticated and user.is_superuser %}
+                <h2>Administracion </h2> <a
+                href="{% url 'crear_restaurante' %}"
+                class="btn btn-primary btn-sm"
+                ><i class="fa fa-plus fa-lg" title="New Record"> </i>
+                </a>
+                
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Nombre </th>
+                            <th>Calificacion</th>
+                            
+                            <th>Ubicacion</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for restaurante in restaurante_list %}
+                        <tr>
+                            <td>{{ restaurantel.id }}</td>
+                            <td>{{ restaurante.nombre }}</td>
+                            <td>{{ restaurante.calificacion }}</td>
+                            <td>{{ restaurante.ubicacion }}</td>
+                            
+                            <td>
+                                <a
+                                href="{% url 'restaurante_update' restaurante.id %}"
+                                class="btn btn-primary"
+                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
+                                </a>
+                                <a
+                                href="{% url 'borrar_restaurante' restaurante.id %}"
+                                class="btn btn-danger"
+                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
+                                </a>
+                                
+                            </td>        
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+
+            
+            
+
+            
+        </div>
+
+</section>
+
+{% endblock cuerpo %}

@@ -1,0 +1,14 @@
+{% extends 'app/index.html' %}
+{% load static %}
+
+{% block cuerpo %}
+    
+    
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enviar</button>
+</form>
+
+{% endblock cuerpo %}

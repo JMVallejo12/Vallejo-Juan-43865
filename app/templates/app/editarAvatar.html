@@ -1,0 +1,16 @@
+{% extends 'app/index.html' %}
+{% load static %}
+
+{% block cuerpo %}
+    
+    
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="text-center">
+        <input type="submit" class="btn btn-primary btn-block" value="Cambiar">
+    </div>
+</form>
+
+{% endblock cuerpo %}
